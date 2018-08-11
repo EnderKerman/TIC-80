@@ -160,12 +160,16 @@ end
 === Error Handling ===
 --------------TIC Reference-------------
 === Functions ===
--
+-General
 --TIC()
 The most important function in a TIC
 program. It's called 60 times per second
 when the program runs.
-
+-Drawing on Screen
+--print
+--spr
+--font
+-Sound
 
 === Using Built-in Editors ===
 ------------Reference Ends--------------
