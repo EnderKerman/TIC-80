@@ -1,4 +1,4 @@
--- title: TIC-Lua Reference
+-- title:  TIC-Lua Reference
 -- author: Ender Kerman
 -- desc:   Quick Reference for Beginners
 -- script: lua
@@ -73,12 +73,14 @@ funcName(arg_1,arg_2,...)
 
 Variables are global by default.
 They can be accessed and edited anywhere
+
 -Local
 
 A local variable can only be used in its
 scope and is destructed upon leaving it.
 
 --Declaring Local Variable
+
 local var
 or
 local var=3
@@ -143,7 +145,7 @@ Or you can use elseif:
 if
 	<condition>
 then
- <statements>
+        <statements>
 elseif
 	<conddition>
 then
@@ -158,6 +160,13 @@ end
 === Error Handling ===
 --------------TIC Reference-------------
 === Functions ===
+-
+--TIC()
+The most important function in a TIC
+program. It's called 60 times per second
+when the program runs.
+
+
 === Using Built-in Editors ===
 ------------Reference Ends--------------
 ]]
