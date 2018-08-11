@@ -1,5 +1,5 @@
 -- title:  TIC-Lua Reference
--- author: Ender Kerman
+-- author: Ender Kerman and Cynthia
 -- desc:   Quick Reference for Beginners
 -- script: lua
 
@@ -165,12 +165,22 @@ end
 The most important function in a TIC
 program. It's called 60 times per second
 when the program runs.
+
+--scanline()
 -Drawing on Screen
+--cls
 --print
 --spr
 --font
 -Sound
 
 === Using Built-in Editors ===
+-The Terminal
+--Commands
+-Code Editor
+-Sprite Editor
+-Map Editor
+-SFX Editor
+-Music Editor
 ------------Reference Ends--------------
 ]]
