@@ -89,6 +89,8 @@ local var=3
 
 table={<something a>,<something b>,...}
 
+Indices begin at 1.
+
 Table can be nested to create multidi-
 mentional tables like this:
 
@@ -99,6 +101,9 @@ table={
 }
 
 A table can contain anything but nil.
+
+--Accessing Contents in Tables
+
 
 === Flow Control ===
 
@@ -155,7 +160,11 @@ end
 
 -loops
 --for loop
+There are 2 types of for loop.
+---Numeric Loop
+---Generic Loop
 --while loop
+
 --repeat...until... loop
 === Error Handling ===
 --------------TIC Reference-------------
