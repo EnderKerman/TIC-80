@@ -31,9 +31,65 @@ var=3
 
 -
 === Operators ===
--Logic
--Algrimetic
+-Logical Operators
 
+--"and"
+
+Returns the second operator if the first one is true
+returns the first one if it is false/nil
+
+E.g: a and b
+
+When a = nil:
+returns a
+
+When a = false:
+returns a
+
+For else:
+returns b
+
+--"or"
+
+Returns the second operator if the first one is false/nil
+return the first one if it is true
+
+The "or" operator is basically the opposite of "and" operator
+
+E.g: a or b
+
+When a = nil:
+returns b
+
+When a = false:
+returns b
+
+Else:
+returns a
+
+--Proirity
+"and" operator has a higher propoity than "or"
+
+Therefore "a and b or c" is equivalent with "(a and b) or c"
+"a or b and c" is equivalent with "a or (b and c)"
+
+--Statement example: a and b or c
+(Equals (a and b) or c)
+
+If a is not false/nil:
+"a and b" - a is not false, operator passes b to "or"
+
+b isn't nil/false because it's returned value, so
+"b or c" - b is true, returns b
+
+If a is false/nil:
+"a and b" - a is false, operator passes a to "or"
+
+"a or c" - a is false, returns c
+
+Therefore "a and b or c" will only return b or c, but not a.
+
+-Algrimetic
 
 -Strings
 
