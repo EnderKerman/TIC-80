@@ -31,16 +31,14 @@ var=3
 
 -
 === Operators ===
--Logic
+-Logical Operators
 
 --"and"
-Equivalent with "?"
 
 Returns the second operator if the first one is true
 returns the first one if it is false/nil
 
 E.g: a and b
-(Equals a?b)
 
 When a = nil:
 returns a
@@ -52,7 +50,6 @@ For else:
 returns b
 
 --"or"
-Equivalent with ":"
 
 Returns the second operator if the first one is false/nil
 return the first one if it is true
@@ -60,7 +57,6 @@ return the first one if it is true
 The "or" operator is basically the opposite of "and" operator
 
 E.g: a or b
-(Equals a:b)
 
 When a = nil:
 returns b
@@ -81,7 +77,7 @@ Therefore "a and b or c" is equivalent with "(a and b) or c"
 (Equals (a and b) or c)
 
 If a is not false/nil:
-"a and b" - a is false, operator passes b to "or"
+"a and b" - a is not false, operator passes b to "or"
 
 b isn't nil/false because it's returned value, so
 "b or c" - b is true, returns b
