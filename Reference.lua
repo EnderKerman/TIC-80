@@ -242,6 +242,8 @@ when the program runs.
 === Using Built-in Editors ===
 -The Terminal
 --Commands
+---help
+	Shows command list
 -Code Editor
 -Sprite Editor
 -Map Editor
