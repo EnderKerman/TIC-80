@@ -244,6 +244,20 @@ when the program runs.
 --Commands
 ---help
 	Shows command list
+---wiki
+	Open github wiki page in browser
+	(Desktop versions only)
+---ram
+	Show memory info
+---exit/quit
+	No need to explain
+---new [lua|js|moon|wren|fennel]
+	Create a new cart. Use a para to 
+	specify its language.
+---load <filename> [map|sfx|sprite|music]
+	load the cart. Use a second para to
+	load a part of the cart.
+---save [filename]
 -Code Editor
 -Sprite Editor
 -Map Editor
