@@ -224,23 +224,37 @@ There are 2 types of for loop.
 --repeat...until... loop
 === Error Handling ===
 --------------TIC Reference-------------
-=== Functions ===
+
+=== API Functions ===
+
 -General
+
 --TIC()
+
 The most important function in a TIC
 program. It's called 60 times per second
 when the program runs.
 
 --scanline()
+--OVR()
+
 -Drawing on Screen
+
 --cls
 --print
 --spr
 --font
+
 -Sound
 
+--sfx()
+--music()
+
+
 === Using Built-in Editors ===
+
 -The Terminal
+
 --Commands
 ---help
 	Shows command list
@@ -258,10 +272,56 @@ when the program runs.
 	load the cart. Use a second para to
 	load a part of the cart.
 ---save [filename]
+	Save current cart as <filename>.
+	<filename> is required at frst save.
+---run
+	Run loaded cart
+---resume
+	resume run cart
+---eval/=
+	Run code
+	Note: TIC crashes every time when 
+	I use it.
+---dir/ls
+	The same as they are in Linux.
+---cd <dir>
+	As in Linux.
+---mkdir <directoryName>
+	Make Directory.
+---folder
+	Open working folder in OS
+	(Desktop versions only)
+---add
+	add file from the external.
+---get <filename>
+	export .tic file locally.
+---export [html|native]
+	Export as html or native game(.exe)
+---import
+	Import sprites from .gif.
+---del [filename]
+	delete file or dir.
+---cls
+	clean screen
+---demo
+	install demo carts
+---config
+	edit TIC config.
+---version
+	show current version.
+---edit
+	open cart editor.
+---surf
+	open carts browser
 -Code Editor
 -Sprite Editor
 -Map Editor
 -SFX Editor
 -Music Editor
+
+=== Config ===
+
+=== Hotkeys ===
+
 ------------Reference Ends--------------
 ]]
