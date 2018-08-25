@@ -67,7 +67,7 @@ returns b
 Else:
 returns a
 
---Proirity
+--Priority
 "and" operator has a higher propoity than "or"
 
 Therefore "a and b or c" is equivalent with "(a and b) or c"
@@ -219,30 +219,73 @@ end
 There are 2 types of for loop.
 ---Numeric Loop
 ---Generic Loop
+
 --while loop
+	If the condition evaluates true,
+the statements are executed once more.
+Else, jump to where the while statement
+ends.
+
+---Syntax
+
+while <condition>
+do
+	<statements>
+end
 
 --repeat...until... loop
-=== Error Handling ===
---------------TIC Reference-------------
+	Almost the same as while loop, except
+that evaluation is done AFTER code 
+exucation and that loop breaks when
+condition is true.
+	It's the only block in Lua that is
+not wraped in do ... end keywords.
 
+---Syntax
+repeat
+	<statements>
+until <condition>
+
+=== Error Handling ===
+=== Standard Library ===
+--------------TIC Reference-------------
+version:0.70.5
 === API Functions ===
 
 -General
 
 --TIC()
 
-The most important function in a TIC
+	The most important function in a TIC
 program. It's called 60 times per second
 when the program runs.
 
 --scanline()
+	Called at every line rendering.
+Useful for changing paras between lines.
+
 --OVR()
 
+--init()
+	Called once at app starting.
+
+-Inputs
+
+
+
+
+
+
+
+-Outputs
 -Drawing on Screen
 
---cls
+--cls(num color)
+	clears screen with color indicated by
+a para.
 --print
 --spr
+--map
 --font
 
 -Sound
@@ -250,6 +293,7 @@ when the program runs.
 --sfx()
 --music()
 
+-Memory
 
 === Using Built-in Editors ===
 
@@ -264,24 +308,24 @@ when the program runs.
 ---ram
 	Show memory info
 ---exit/quit
-	No need to explain
+	Needless to explain
 ---new [lua|js|moon|wren|fennel]
 	Create a new cart. Use a para to 
 	specify its language.
----load <filename> [map|sfx|sprite|music]
+---load <cartname> [sprites | map |
+ cover | code | sfx | music | palette]
 	load the cart. Use a second para to
 	load a part of the cart.
----save [filename]
-	Save current cart as <filename>.
-	<filename> is required at frst save.
+---save [cartname]
+	Save current cart as <cartname>.
+	<cartname> is required at frst save.
 ---run
 	Run loaded cart
 ---resume
 	resume run cart
----eval/=
-	Run code
-	Note: TIC crashes every time when 
-	I use it.
+---eval/= <statement>
+	Run code.
+	Note: rusume, not run after using it.
 ---dir/ls
 	The same as they are in Linux.
 ---cd <dir>
@@ -293,13 +337,14 @@ when the program runs.
 	(Desktop versions only)
 ---add
 	add file from the external.
----get <filename>
+---get <cartname>
 	export .tic file locally.
----export [html|native]
+---export [html | native | sprites | cover | map]
 	Export as html or native game(.exe)
----import
-	Import sprites from .gif.
----del [filename]
+	Or export pics as .gif
+---import [sprites | cover | map]
+	Import from .gif.
+---del <filename>
 	delete file or dir.
 ---cls
 	clean screen
@@ -313,11 +358,17 @@ when the program runs.
 	open cart editor.
 ---surf
 	open carts browser
+
 -Code Editor
+
 -Sprite Editor
+
 -Map Editor
+
 -SFX Editor
+
 -Music Editor
+
 
 === Config ===
 
