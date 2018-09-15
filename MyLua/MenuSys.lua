@@ -11,8 +11,9 @@ local up,down,left,right
 local title, text="",""
 
 --process
-local cusor=0
+local cursor=1
 local index={}
+local currentDir={}
 
 --data
 local text00,text01,text02,text03,text04,text05,text06,text07,text08={[0]=""},{[0]=""},{[0]=""},{[0]=""},{[0]=""},{[0]=""},{[0]=""},{[0]=""}
@@ -22,20 +23,24 @@ local sub2c={[0]="title sub2c",[1]=text05,[2]=text06}
 local sub2d={[0]="title sub2d",[1]=text07,[2]=text08}
 local sub1a={[0]="title sub1a",[1]=sub2a,[2]=sub2b}
 local sub1b={[0]="title sub1b",[1]=sub2c,[2]=sub2d}
-local memu={[0]="Main",[1]=sub1a,[2]=sub1b}
+local menu={[0]="Main",[1]=sub1a,[2]=sub1b}
+currentDir=menu
 
 --function decalrations
 function TIC()
 	--taking inputs
-	up=btnp(2)
-	down=btnp(0)
-	left=btnp(1)
+	up=btnp(0)
+	down=btnp(1)
+	left=btnp(2)
 	right=btnp(3)
 
 	--processing
 	--refresh cursor location and index
 	if up or down then  UpdCursor() end
-	if left or right then  UpdIdex() end
+	if left or right then
+		UpdIndex()
+		LoadCurrentDir() --reload currentDir
+	end
 	--get title according to index
 	GetTitle()
 	--get text
@@ -48,25 +53,45 @@ function TIC()
 	print(title,0,0)
 	--print text
 	print(text,84,20)
+	--debug
+	
 
 end
 
 function UpdCursor()
-	trace("Update Cursor")
+	if up and cursor>1 then 
+		cursor=cursor-1 --move up cursor
+	end
+	if down then 
+		cursor=cursor+1 --move down cursor
+	end
+	if cursor > #currentDir then 
+		cursor=#currentDir --check if cursor is too big
+	end
+	trace(cursor.."/"..#currentDir)
 end
 
 function UpdIndex()
-	trace("Update Index")
+	if left then table.remove(index) end --goes up level in menu
+	if right and currentDir[cursor][1]~=nil then table.insert(index,cursor) end --goes down a level in menu
+
+end
+
+function LoadCurrentDir()
+	currentDir=menu
+	for i,v in pairs(index) do
+		currentDir=currentDir[v]
+	end
 end
 
 function GetTitle()
 	title="Test Title"
-	trace("Get Title")
+	title=currentDir[0]
 end
 
 function GetText()
 	text="testtext"
-	trace("Get Text")
+	
 end
 
 function DrawCursor()
