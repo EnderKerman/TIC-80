@@ -45,3 +45,25 @@ end
 -- 000:140c1c44243430346d4e4a4e854c30346524d04648757161597dced27d2c8595a16daa2cd2aa996dc2cadad45edeeed6
 -- </PALETTE>
 
+--[[
+--var declarations
+--input
+local up,down,left,right
+
+--output
+local title="", text=""
+
+--process
+local cusor=0,index={}
+
+--data
+local text00={0:""},text01={0:""},text02={0:""},text03={0:""},text04={0:""},text05={0:""},text06={0:""},text07={0:""},text08={0:""}
+local sub2a={0:"title sub2a",1:text01,2:text02}
+local sub2b={0:"title sub2b",1:text03,2:text04}
+local sub2c={0:"title sub2c",1:text05,2:text06}
+local sub2d={0:"title sub2d",1:text07,2:text08}
+local sub1a={0:"title sub1a".1:sub2a,2:sub2b}
+local sub1b={0:"title sub1b".1:sub2c,2:sub2d}
+local memu={0:"Main",i:sub1a,2:sub1b}
+
+]]
