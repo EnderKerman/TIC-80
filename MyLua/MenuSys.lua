@@ -3,21 +3,74 @@
 -- desc:   Preparation for Reference
 -- script: lua
 
-t=0
-x=96
-y=24
+--var declarations
+--input
+local up,down,left,right
 
+--output
+local title, text="",""
+
+--process
+local cusor=0
+local index={}
+
+--data
+local text00,text01,text02,text03,text04,text05,text06,text07,text08={[0]=""},{[0]=""},{[0]=""},{[0]=""},{[0]=""},{[0]=""},{[0]=""},{[0]=""}
+local sub2a={[0]="title sub2a",[1]=text01,[2]=text02}
+local sub2b={[0]="title sub2b",[1]=text03,[2]=text04}
+local sub2c={[0]="title sub2c",[1]=text05,[2]=text06}
+local sub2d={[0]="title sub2d",[1]=text07,[2]=text08}
+local sub1a={[0]="title sub1a",[1]=sub2a,[2]=sub2b}
+local sub1b={[0]="title sub1b",[1]=sub2c,[2]=sub2d}
+local memu={[0]="Main",[1]=sub1a,[2]=sub1b}
+
+--function decalrations
 function TIC()
+	--taking inputs
+	up=btnp(2)
+	down=btnp(0)
+	left=btnp(1)
+	right=btnp(3)
 
-	if btn(0) then y=y-1 end
-	if btn(1) then y=y+1 end
-	if btn(2) then x=x-1 end
-	if btn(3) then x=x+1 end
+	--processing
+	--refresh cursor location and index
+	if up or down then  UpdCursor() end
+	if left or right then  UpdIdex() end
+	--get title according to index
+	GetTitle()
+	--get text
+	GetText()
+	--outputs
+	cls()
+	--draw cursor
+	DrawCursor()
+	--print title
+	print(title,0,0)
+	--print text
+	print(text,84,20)
 
-	cls(13)
-	spr(1+t%60//30*2,x,y,14,3,0,0,2,2)
-	print("Menu In Progress",84,84)
-	t=t+1
+end
+
+function UpdCursor()
+	trace("Update Cursor")
+end
+
+function UpdIndex()
+	trace("Update Index")
+end
+
+function GetTitle()
+	title="Test Title"
+	trace("Get Title")
+end
+
+function GetText()
+	text="testtext"
+	trace("Get Text")
+end
+
+function DrawCursor()
+	
 end
 
 -- <TILES>
@@ -45,25 +98,3 @@ end
 -- 000:140c1c44243430346d4e4a4e854c30346524d04648757161597dced27d2c8595a16daa2cd2aa996dc2cadad45edeeed6
 -- </PALETTE>
 
---[[
---var declarations
---input
-local up,down,left,right
-
---output
-local title="", text=""
-
---process
-local cusor=0,index={}
-
---data
-local text00={0:""},text01={0:""},text02={0:""},text03={0:""},text04={0:""},text05={0:""},text06={0:""},text07={0:""},text08={0:""}
-local sub2a={0:"title sub2a",1:text01,2:text02}
-local sub2b={0:"title sub2b",1:text03,2:text04}
-local sub2c={0:"title sub2c",1:text05,2:text06}
-local sub2d={0:"title sub2d",1:text07,2:text08}
-local sub1a={0:"title sub1a".1:sub2a,2:sub2b}
-local sub1b={0:"title sub1b".1:sub2c,2:sub2d}
-local memu={0:"Main",i:sub1a,2:sub1b}
-
-]]
