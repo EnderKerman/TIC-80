@@ -16,11 +16,11 @@ local index={}
 local currentDir={}
 
 --data
-local text00,text01,text02,text03,text04,text05,text06,text07,text08={[0]=""},{[0]=""},{[0]=""},{[0]=""},{[0]=""},{[0]=""},{[0]=""},{[0]=""}
-local sub2a={[0]="title sub2a",[1]=text01,[2]=text02}
-local sub2b={[0]="title sub2b",[1]=text03,[2]=text04}
-local sub2c={[0]="title sub2c",[1]=text05,[2]=text06}
-local sub2d={[0]="title sub2d",[1]=text07,[2]=text08}
+local text00,text01,text02,text03,text04,text05,text06,text07,text08={[0]="text0"},{[0]="text1"},{[0]="text2"},{[0]="text3"},{[0]="text4"},{[0]="text5"},{[0]="text6"},{[0]="text7"}
+local sub2a={[0]="title sub2a",[1]=text00,[2]=text01}
+local sub2b={[0]="title sub2b",[1]=text02,[2]=text03}
+local sub2c={[0]="title sub2c",[1]=text04,[2]=text05}
+local sub2d={[0]="title sub2d",[1]=text06,[2]=text07}
 local sub1a={[0]="title sub1a",[1]=sub2a,[2]=sub2b}
 local sub1b={[0]="title sub1b",[1]=sub2c,[2]=sub2d}
 local menu={[0]="Main",[1]=sub1a,[2]=sub1b}
@@ -68,7 +68,6 @@ function UpdCursor()
 	if cursor > #currentDir then 
 		cursor=#currentDir --check if cursor is too big
 	end
-	trace(cursor.."/"..#currentDir)
 end
 
 function UpdIndex()
@@ -90,12 +89,15 @@ function GetTitle()
 end
 
 function GetText()
-	text="testtext"
+	text=""
+	for i=1,#currentDir,1 do
+		text=text..currentDir[i][0].."\n"
+	end
 	
 end
 
 function DrawCursor()
-	
+	rect(80,15+5.5*cursor,160,5,13)
 end
 
 -- <TILES>
