@@ -71,7 +71,7 @@ function UpdCursor()
 end
 
 function UpdIndex()
-	if left then table.remove(index) end --goes up level in menu
+	if left and #index~=0 then cursor=table.remove(index) end --goes up level in menu
 	if right and currentDir[cursor][1]~=nil then table.insert(index,cursor) end --goes down a level in menu
 
 end
