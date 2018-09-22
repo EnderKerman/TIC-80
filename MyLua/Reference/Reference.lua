@@ -3,376 +3,125 @@
 -- desc:   Quick Reference for Beginners
 -- script: lua
 
-t=0
-x=96
-y=24
+--var declarations
+--input
+local up,down,left,right
 
+--output
+local title, text="",""
+
+--process
+local cursor=1
+local index={}
+local currentDir={}
+
+--data
+local text00,text01,text02,text03,text04,text05,text06,text07,text08={[0]="text0"},{[0]="text1"},{[0]="text2"},{[0]="text3"},{[0]="text4"},{[0]="text5"},{[0]="text6"},{[0]="text7"}
+local sub2a={[0]="title sub2a",[1]=text00,[2]=text01}
+local sub2b={[0]="title sub2b",[1]=text02,[2]=text03}
+local sub2c={[0]="title sub2c",[1]=text04,[2]=text05}
+local sub2d={[0]="title sub2d",[1]=text06,[2]=text07}
+local sub1a={[0]="title sub1a",[1]=sub2a,[2]=sub2b}
+local sub1b={[0]="title sub1b",[1]=sub2c,[2]=sub2d}
+local menu={[0]="Main",[1]=sub1a,[2]=sub1b}
+currentDir=menu
+
+--function decalrations
 function TIC()
+	--taking inputs
+	up=btnp(0)
+	down=btnp(1)
+	left=btnp(2)
+	right=btnp(3)
 
-	if btn(0) then y=y-1 end
-	if btn(1) then y=y+1 end
-	if btn(2) then x=x-1 end
-	if btn(3) then x=x+1 end
+	--processing
+	--refresh cursor location and index
+	if up or down then  UpdCursor() end
+	if left or right then
+		UpdIndex()
+		LoadCurrentDir() --reload currentDir
+	end
+	--get title according to index
+	GetTitle()
+	--get text
+	GetText()
+	--outputs
+	cls()
+	--draw cursor
+	DrawCursor()
+	--print title
+	print(title,0,0)
+	--print text
+	print(text,84,20)
+	--debug
+	
 
-	cls(13)
-	spr(1+t%60//30*2,x,y,14,3,0,0,2,2)
-	print("Reference In Development",42,84)
-	t=t+1
 end
 
-------------Reference Begins------------
---[[
---------------Lua Reference-------------
-=== Basic Syntax ===
-
--assign a variable
-
-var=3
-
--
-=== Operators ===
--Logical Operators
-
---"and"
-
-Returns the second operator if the first one is true
-returns the first one if it is false/nil
-
-E.g: a and b
-
-When a = nil:
-returns a
-
-When a = false:
-returns a
-
-For else:
-returns b
-
---"or"
-
-Returns the second operator if the first one is false/nil
-return the first one if it is true
-
-The "or" operator is basically the opposite of "and" operator
-
-E.g: a or b
-
-When a = nil:
-returns b
-
-When a = false:
-returns b
-
-Else:
-returns a
-
---Priority
-"and" operator has a higher propoity than "or"
-
-Therefore "a and b or c" is equivalent with "(a and b) or c"
-"a or b and c" is equivalent with "a or (b and c)"
-
---Statement example: a and b or c
-(Equals (a and b) or c)
-
-If a is not false/nil:
-"a and b" - a is not false, operator passes b to "or"
-
-b isn't nil/false because it's returned value, so
-"b or c" - b is true, returns b
-
-If a is false/nil:
-"a and b" - a is false, operator passes a to "or"
-
-"a or c" - a is false, returns c
-
-Therefore "a and b or c" will only return b or c, but not a.
-
--Algrimetic
-
--Strings
-
-..   --Links two strings into a new one
-
-"Hello ".."World!" == "Hello World!"
-
-#    --Returns the length of a string
-
-#"Hello"==5
-
--
-
-=== Functions ===
-
-A function takes 0 or more arguments and
-may return something.
-
-Arguments can be anything including 
-functions.
-
--Declaring a Function
-
-function funcName(arg_1,arg_2,...)
-
-	--Statements Here
-	return <Something>
+function UpdCursor()
+	if up and cursor>1 then 
+		cursor=cursor-1 --move up cursor
+	end
+	if down then 
+		cursor=cursor+1 --move down cursor
+	end
+	if cursor > #currentDir then 
+		cursor=#currentDir --check if cursor is too big
+	end
 end
 
--Calling a Function
+function UpdIndex()
+	if left and #index~=0 then cursor=table.remove(index) end --goes up level in menu
+	if right and currentDir[cursor][1]~=nil then table.insert(index,cursor) end --goes down a level in menu
 
-funcName(arg_1,arg_2,...)
-
-=== Variables ===
-
--Global
-
-Variables are global by default.
-They can be accessed and edited anywhere
-
--Local
-
-A local variable can only be used in its
-scope and is destructed upon leaving it.
-
---Declaring Local Variable
-
-local var
-or
-local var=3
-
--Table
-
-table={<something a>,<something b>,...}
-
-Indices begin at 1.
-
-Table can be nested to create multidi-
-mentional tables like this:
-
-table={
-{a,b,c,d},
-{e,f,g,h},
-{i,j,k,l}
-}
-
-A table can contain anything but nil.
-
---Accessing Contents in Tables
-
-
-=== Flow Control ===
-
--if statement
-
---Basic Syntax
-Like This:
-
-if
-	<condition>
-then
-	<statements>
 end
 
-Or like this:
-
-if <condition> then
-	<statements>
+function LoadCurrentDir()
+	currentDir=menu
+	for i,v in pairs(index) do
+		currentDir=currentDir[v]
+	end
 end
 
-Or this:
-
-if <condition>
-then
-	<statements>
+function GetTitle()
+	title="Test Title"
+	title=currentDir[0]
 end
 
-And even this:
-
-if <condition> then <statements> end
-
---if...then...else...
-
-if
-	<condition>
-then
-	<statements>
-else
-	<statements>
+function GetText()
+	text=""
+	for i=1,#currentDir,1 do
+		text=text..currentDir[i][0].."\n"
+	end
+	
 end
 
-Or you can use elseif:
-
-if
-	<condition>
-then
-        <statements>
-elseif
-	<conddition>
-then
-	<statements>
+function DrawCursor()
+	rect(80,15+5.5*cursor,160,5,13)
 end
 
+-- <TILES>
+-- 001:efffffffff222222f8888888f8222222f8fffffff8ff0ffff8ff0ffff8ff0fff
+-- 002:fffffeee2222ffee88880fee22280feefff80fff0ff80f0f0ff80f0f0ff80f0f
+-- 003:efffffffff222222f8888888f8222222f8fffffff8fffffff8ff0ffff8ff0fff
+-- 004:fffffeee2222ffee88880fee22280feefff80ffffff80f0f0ff80f0f0ff80f0f
+-- 017:f8fffffff8888888f888f888f8888ffff8888888f2222222ff000fffefffffef
+-- 018:fff800ff88880ffef8880fee88880fee88880fee2222ffee000ffeeeffffeeee
+-- 019:f8fffffff8888888f888f888f8888ffff8888888f2222222ff000fffefffffef
+-- 020:fff800ff88880ffef8880fee88880fee88880fee2222ffee000ffeeeffffeeee
+-- </TILES>
 
--loops
---for loop
-There are 2 types of for loop.
----Numeric Loop
----Generic Loop
+-- <WAVES>
+-- 000:00000000ffffffff00000000ffffffff
+-- 001:0123456789abcdeffedcba9876543210
+-- 002:0123456789abcdef0123456789abcdef
+-- </WAVES>
 
---while loop
-	If the condition evaluates true,
-the statements are executed once more.
-Else, jump to where the while statement
-ends.
+-- <SFX>
+-- 000:000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000304000000000
+-- </SFX>
 
----Syntax
+-- <PALETTE>
+-- 000:140c1c44243430346d4e4a4e854c30346524d04648757161597dced27d2c8595a16daa2cd2aa996dc2cadad45edeeed6
+-- </PALETTE>
 
-while <condition>
-do
-	<statements>
-end
-
---repeat...until... loop
-	Almost the same as while loop, except
-that evaluation is done AFTER code 
-exucation and that loop breaks when
-condition is true.
-	It's the only block in Lua that is
-not wraped in do ... end keywords.
-
----Syntax
-repeat
-	<statements>
-until <condition>
-
-=== Error Handling ===
-=== Standard Library ===
---------------TIC Reference-------------
-version:0.70.5
-=== API Functions ===
-
--General
-
---TIC()
-
-	The most important function in a TIC
-program. It's called 60 times per second
-when the program runs.
-
---scanline()
-	Called at every line rendering.
-Useful for changing paras between lines.
-
---OVR()
-
---init()
-	Called once at app starting.
-
--Inputs
-
-
-
-
-
-
-
--Outputs
--Drawing on Screen
-
---cls(num color)
-	clears screen with color indicated by
-a para.
---print
---spr
---map
---font
-
--Sound
-
---sfx()
---music()
-
--Memory
-
-=== Using Built-in Editors ===
-
--The Terminal
-
---Commands
----help
-	Shows command list
----wiki
-	Open github wiki page in browser
-	(Desktop versions only)
----ram
-	Show memory info
----exit/quit
-	Needless to explain
----new [lua|js|moon|wren|fennel]
-	Create a new cart. Use a para to 
-	specify its language.
----load <cartname> [sprites | map |
- cover | code | sfx | music | palette]
-	load the cart. Use a second para to
-	load a part of the cart.
----save [cartname]
-	Save current cart as <cartname>.
-	<cartname> is required at frst save.
----run
-	Run loaded cart
----resume
-	resume run cart
----eval/= <statement>
-	Run code.
-	Note: rusume, not run after using it.
----dir/ls
-	The same as they are in Linux.
----cd <dir>
-	As in Linux.
----mkdir <directoryName>
-	Make Directory.
----folder
-	Open working folder in OS
-	(Desktop versions only)
----add
-	add file from the external.
----get <cartname>
-	export .tic file locally.
----export [html | native | sprites | cover | map]
-	Export as html or native game(.exe)
-	Or export pics as .gif
----import [sprites | cover | map]
-	Import from .gif.
----del <filename>
-	delete file or dir.
----cls
-	clean screen
----demo
-	install demo carts
----config
-	edit TIC config.
----version
-	show current version.
----edit
-	open cart editor.
----surf
-	open carts browser
-
--Code Editor
-
--Sprite Editor
-
--Map Editor
-
--SFX Editor
-
--Music Editor
-
-
-=== Config ===
-
-=== Hotkeys ===
-
-------------Reference Ends--------------
-]]
